@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val btn:Button = v as Button
         tvResult.append(btn.text)
     }
-    fun calculate(content: String): Float {
+    fun calculate(content: String): String {
         var opperand1: Float
         var opperand2: Float
         var result: Float = 0F
@@ -60,8 +60,10 @@ class MainActivity : AppCompatActivity() {
         val subCount = content.count(isSub)
         val divCount = content.count(isDiv)
         val multCount = content.count(isMult)
-        if ((sumCount + subCount + divCount+multCount)!=1){
+        if ((sumCount + subCount + divCount+multCount)>1){
             throw Exception()
+        } else if((sumCount + subCount + divCount+multCount) == 0){
+            return content
         } else {
             val separated = content.split('+', '-', '\u00F7', '\u00D7')
             opperand1 = separated[0].trim().toFloat()
@@ -76,6 +78,6 @@ class MainActivity : AppCompatActivity() {
                 result = opperand1 * opperand2
             }
         }
-        return result
+        return result.toString()
     }
 }
